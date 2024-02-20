@@ -43,13 +43,23 @@
     </header>
 
     <!-- Profiles container -->
-    <div class="profile" id="profiles-container"></div>
-
-    <!-- Firebase integration and fetching data will require JavaScript code -->
+    <div class="profile" id="profiles-container">
+        <!-- User profile 1 -->
+        <div class="profile-info">
+            <img src="http://res.cloudinary.com/thunkablecloudinary123/image/upload/v1707878511/gstldmnme5ocirknexh6.jpg" alt="Alex2">
+            <h2>Alex2</h2>
+            <p>W mans 2</p>
+        </div>
+        <!-- User profile 2 -->
+        <div class="profile-info">
+            <img src="http://res.cloudinary.com/thunkablecloudinary123/image/upload/v1707878119/w8rudyyplz32gdpsmy9t.jpg" alt="Alex">
+            <h2>Alex</h2>
+            <p>W mans</p>
+        </div>
+    </div>
 
     <!-- Embedding Thunkable app -->
     <div id="thunkable-embed">
-        <!-- You need to replace the URL with the actual URL provided by Thunkable -->
         <iframe src="https://thunkable.site/w/Y5FWcvAgIprjbPrdie1oM" title="Profile App" width="100%" height="600px"></iframe>
     </div>
 
@@ -76,55 +86,21 @@
         const database = firebase.database();
 
         // Function to find data in Realtime Database and display it
+        // This function is now redundant since we are displaying users directly in the HTML,
+        // however, we keep the skeleton here in case you need to re-enable dynamic fetching.
         function displayUserData(userData) {
-            const profilesContainer = document.getElementById('profiles-container');
-
-            // Clear any existing content
-            profilesContainer.innerHTML = '';
-
-            // Loop through each user data and create profile elements
-            userData.forEach(user => {
-                const profileDiv = document.createElement('div');
-                profileDiv.classList.add('profile-info');
-
-                // Create and append user image
-                const userImage = document.createElement('img');
-                userImage.src = user.image;
-                userImage.alt = user.name;
-                profileDiv.appendChild(userImage);
-
-                // Create and append user name
-                const userName = document.createElement('h2');
-                userName.textContent = user.name;
-                profileDiv.appendChild(userName);
-
-                // Create and append user bio
-                const userBio = document.createElement('p');
-                userBio.textContent = user.bio;
-                profileDiv.appendChild(userBio);
-
-                // Append profile div to container
-                profilesContainer.appendChild(profileDiv);
-            });
+            // Functionality to display user data dynamically can be re-added here if needed
         }
 
         // Function to find data in Realtime Database
+        // As above, this is now redundant but kept for potential future use.
         function findData() {
-            const ref = database.ref('users'); // Assuming 'users' is the path to your user data
-            ref.once('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    // Convert data object to array for easier manipulation
-                    const userData = Object.values(data);
-                    displayUserData(userData);
-                } else {
-                    console.log("No data found.");
-                }
-            });
+            // Code to fetch user data dynamically can be re-added here if needed
         }
 
         // Call the function to find data
-        findData();
+        // As we are now displaying users directly, no need to call findData on load.
+        // findData();
     </script>
     <!-- JavaScript code ends here -->
 </body>

@@ -42,18 +42,8 @@
         <img src="Logo.png" alt="Logo">
     </header>
 
-    <div class="profile">
-        <div class="profile-info">
-            <img src="user1.jpg" alt="User 1">
-            <h2>User 1</h2>
-            <p>Profile Description for User 1</p>
-        </div>
-        <div class="profile-info">
-            <img src="user2.jpg" alt="User 2">
-            <h2>User 2</h2>
-            <p>Profile Description for User 2</p>
-        </div>
-    </div>
+    <!-- Profiles container -->
+    <div class="profile" id="profiles-container"></div>
 
     <!-- Firebase integration and fetching data will require JavaScript code -->
 
@@ -85,12 +75,51 @@
         const analytics = firebase.analytics();
         const database = firebase.database();
 
+        // Function to find data in Realtime Database and display it
+        function displayUserData(userData) {
+            const profilesContainer = document.getElementById('profiles-container');
+
+            // Clear any existing content
+            profilesContainer.innerHTML = '';
+
+            // Loop through each user data and create profile elements
+            userData.forEach(user => {
+                const profileDiv = document.createElement('div');
+                profileDiv.classList.add('profile-info');
+
+                // Create and append user image
+                const userImage = document.createElement('img');
+                userImage.src = user.image;
+                userImage.alt = user.name;
+                profileDiv.appendChild(userImage);
+
+                // Create and append user name
+                const userName = document.createElement('h2');
+                userName.textContent = user.name;
+                profileDiv.appendChild(userName);
+
+                // Create and append user bio
+                const userBio = document.createElement('p');
+                userBio.textContent = user.bio;
+                profileDiv.appendChild(userBio);
+
+                // Append profile div to container
+                profilesContainer.appendChild(profileDiv);
+            });
+        }
+
         // Function to find data in Realtime Database
         function findData() {
-            const ref = database.ref('your_database_path');
+            const ref = database.ref('users'); // Assuming 'users' is the path to your user data
             ref.once('value', (snapshot) => {
                 const data = snapshot.val();
-                console.log(data); // You can do further processing with the data here
+                if (data) {
+                    // Convert data object to array for easier manipulation
+                    const userData = Object.values(data);
+                    displayUserData(userData);
+                } else {
+                    console.log("No data found.");
+                }
             });
         }
 
@@ -100,5 +129,4 @@
     <!-- JavaScript code ends here -->
 </body>
 </html>
-
 

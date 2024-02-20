@@ -1,1 +1,104 @@
-"Hello World" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .profile {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+        .profile-info {
+            text-align: center;
+        }
+        #thunkable-embed {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Logo.png" alt="Logo">
+    </header>
+
+    <div class="profile">
+        <div class="profile-info">
+            <img src="user1.jpg" alt="User 1">
+            <h2>User 1</h2>
+            <p>Profile Description for User 1</p>
+        </div>
+        <div class="profile-info">
+            <img src="user2.jpg" alt="User 2">
+            <h2>User 2</h2>
+            <p>Profile Description for User 2</p>
+        </div>
+    </div>
+
+    <!-- Firebase integration and fetching data will require JavaScript code -->
+
+    <!-- Embedding Thunkable app -->
+    <div id="thunkable-embed">
+        <!-- You need to replace the URL with the actual URL provided by Thunkable -->
+        <iframe src="https://thunkable.site/w/Y5FWcvAgIprjbPrdie1oM" title="Profile App" width="100%" height="600px"></iframe>
+    </div>
+
+    <!-- JavaScript code starts here -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAPnJJSFM4L1Zo8d8hpfIyu-8jBnrui3Pg",
+          authDomain: "profileapp-6d21e.firebaseapp.com",
+          databaseURL: "https://profileapp-6d21e-default-rtdb.firebaseio.com",
+          projectId: "profileapp-6d21e",
+          storageBucket: "profileapp-6d21e.appspot.com",
+          messagingSenderId: "137884984271",
+          appId: "1:137884984271:web:500e37090ce32d0ff268ba",
+          measurementId: "G-3761H55Q90"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const analytics = firebase.analytics();
+        const database = firebase.database();
+
+        // Function to find data in Realtime Database
+        function findData() {
+            const ref = database.ref('your_database_path');
+            ref.once('value', (snapshot) => {
+                const data = snapshot.val();
+                console.log(data); // You can do further processing with the data here
+            });
+        }
+
+        // Call the function to find data
+        findData();
+    </script>
+    <!-- JavaScript code ends here -->
+</body>
+</html>
+
+
